@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_58872_needit.asu_GetLocationData</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>asu_GetLocationData</name>
+        <script><![CDATA[var asu_GetLocationData = Class.create();
+
+asu_GetLocationData.prototype = Object.extendsObject(AbstractAjaxProcessor, {
+
+    getCampus: function() {
+
+        var buildingid = this.getParameter('sysparm_buildingid');
+
+        var loc = new GlideRecord('cmn_location');
+
+        if (loc.get(buildingid)) {
+
+            var campus = new GlideRecord('cmn_location');
+
+            if (campus.get(loc.parent)) {
+
+                var json = new JSON();
+
+                var results = {
+
+                    "sys_id": campus.getValue("sys_id"),
+
+                    "name": campus.getValue("name")
+
+                };
+
+                return json.encode(results);
+
+            }
+
+        } else {
+
+            return "Go nads";
+
+        }
+
+    }
+
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-12-07 17:34:31</sys_created_on>
+        <sys_id>da0e1ed897cbf11096eebf1e6253af64</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>asu_GetLocationData</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_script_include_da0e1ed897cbf11096eebf1e6253af64</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-12-07 17:39:50</sys_updated_on>
+    </sys_script_include>
+</record_update>
